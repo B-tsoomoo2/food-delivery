@@ -17,7 +17,7 @@ export const login = async (req: Request, res: Response) => {
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
-    return res.send("invalid credentials");
+    return res.status(401).json({ message: "invalid credentials" });
   }
 
   try {
@@ -33,7 +33,7 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: "1h" },
     );
 
-    res.json({ accesToken });
+    res.json({ message: "Successfully login", token: accesToken });
   } catch (error) {
     res.send("invalid credentials");
   }
