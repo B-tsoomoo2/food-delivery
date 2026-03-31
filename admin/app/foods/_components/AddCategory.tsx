@@ -46,7 +46,7 @@ export const AddCategory = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <form>
         <DialogTrigger>
-          <Plus className="size-3" strokeWidth={2.2} />
+          <Plus className="size-3 text-red-500" strokeWidth={2.2} />
         </DialogTrigger>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>

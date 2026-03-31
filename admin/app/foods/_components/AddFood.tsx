@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Pencil } from "lucide-react";
 import { FoodAddDialog } from "./AddFoodDialog";
 
 const appetizers = [
@@ -19,12 +18,63 @@ const appetizers = [
   },
 ];
 
-const AppetizerArtwork = () => {
+const salads = [
+  {
+    id: 1,
+    name: "Chicken Caesar Salad",
+    price: "$12.99",
+    description:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+  {
+    id: 2,
+    name: "Greek Garden Salad",
+    price: "$12.99",
+    description:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+];
+
+const pizzas = [
+  {
+    id: 1,
+    name: "Pepperoni Pizza",
+    price: "$12.99",
+    description:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+  {
+    id: 2,
+    name: "Veggie Supreme Pizza",
+    price: "$12.99",
+    description:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+];
+
+const lunchFavorites = [
+  {
+    id: 1,
+    name: "Chicken Teriyaki Bowl",
+    price: "$12.99",
+    description:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+  {
+    id: 2,
+    name: "Beef Rice Plate",
+    price: "$12.99",
+    description:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+];
+
+const FoodArtwork = () => {
   return (
     <div className="relative h-40 w-full overflow-hidden rounded-[14px]">
       <Image
         src="/chad.jpg"
-        alt="Appetizer"
+        alt="Food"
         fill
         className="object-cover"
         sizes=" w-screen  320px"
@@ -34,10 +84,12 @@ const AppetizerArtwork = () => {
 };
 
 const FoodCard = ({
+  sectionName,
   name,
   description,
   price,
 }: {
+  sectionName: string;
   name: string;
   description: string;
   price: string;
@@ -45,14 +97,18 @@ const FoodCard = ({
   return (
     <div className="rounded-[18px]  bg-white p-2.5">
       <div className="relative overflow-hidden rounded-[14px]">
-        <AppetizerArtwork />
+        <FoodArtwork />
 
-        <button
-          type="button"
-          className="absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full bg-white transition hover:bg-[#FFF5F5]"
-        >
-          <Pencil className="size-3.5" strokeWidth={2.6} />
-        </button>
+        <FoodAddDialog
+          mode="edit"
+          sectionName={sectionName}
+          initialFood={{
+            foodName: name,
+            price: price.replace("$", ""),
+            ingredients: description,
+            category: sectionName,
+          }}
+        />
       </div>
 
       <div className="mt-3 flex items-start justify-between gap-2">
@@ -69,29 +125,52 @@ const FoodCard = ({
   );
 };
 
-export const AddFood = () => {
+const FoodSection = ({
+  title,
+  foods,
+}: {
+  title: string;
+  foods: {
+    id: number;
+    name: string;
+    price: string;
+    description: string;
+  }[];
+}) => {
   return (
-    <div className="mt-5 rounded-[18px] bg-white p-4 md:p-5">
+    <div className="rounded-[18px] bg-white p-4 md:p-5">
       <div className="flex items-center gap-2">
         <h2 className="text-[24px] leading-8 font-semibold text-[#18181B]">
-          Appetizers
+          {title}
         </h2>
         <span className="text-[24px] leading-8 font-semibold text-[#18181B]">
-          ({appetizers.length})
+          ({foods.length})
         </span>
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <FoodAddDialog />
-        {appetizers.map((appetizer) => (
+        <FoodAddDialog sectionName={title} />
+        {foods.map((food) => (
           <FoodCard
-            key={appetizer.id}
-            name={appetizer.name}
-            description={appetizer.description}
-            price={appetizer.price}
+            key={food.id}
+            sectionName={title}
+            name={food.name}
+            description={food.description}
+            price={food.price}
           />
         ))}
       </div>
+    </div>
+  );
+};
+
+export const AddFood = () => {
+  return (
+    <div className="mt-5 space-y-5 ">
+      <FoodSection title="Appetizers" foods={appetizers} />
+      <FoodSection title="Salads" foods={salads} />
+      <FoodSection title="Pizzas" foods={pizzas} />
+      <FoodSection title="Lunch favorites" foods={lunchFavorites} />
     </div>
   );
 };
