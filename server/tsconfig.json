@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "typeRoots": [
+      "./src/types", // Path to your custom types folder
+      "./node_modules/@types" // Default location for installed types
+    ],
     "target": "ES2020",
     "module": "commonjs",
     "lib": ["ES2020"],
@@ -11,6 +15,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../admin/app/api"],
   "exclude": ["node_modules", "dist"]
 }
