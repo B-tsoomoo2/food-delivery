@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { cn } from "@/lib/utils";
 import { User } from "lucide-react";
 import { AdminSidebar } from "@/components/AdminSidebar";
@@ -42,6 +42,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex gap-2 items-center justify-between p-10">
         {children}
+        <img
+          src="/images/img.png"
+          height={100}
+          width={1000}
+          className="object-cover"
+        />
       </body>
     </html>
   );
