@@ -1,6 +1,6 @@
 import { Category } from "@/lib/types/common";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+const API_URL = process.env.API_URL ?? "http://localhost:8080";
 
 export const getCategories = async (): Promise<{ categories: Category[] }> => {
   const response = await fetch(`${API_URL}/categories`, {

@@ -1,5 +1,5 @@
 export const addFood = async (name: string) => {
-  await fetch("http://localhost:3000/foods", {
+  await fetch(`${process.env.API_URL}/foods`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

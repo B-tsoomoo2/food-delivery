@@ -16,7 +16,7 @@ export interface Food {
 }
 
 export const getCategories = async (): Promise<Category[]> => {
-  const data = await fetch("http://localhost:8080/categories");
+  const data = await fetch(`${process.env.API_URL}/categories`);
   const categories = await data.json();
 
   return categories;

@@ -1,5 +1,5 @@
 export const addCategory = async (name: string) => {
-  await fetch("http://localhost:3000/categories", {
+  await fetch(`${process.env.API_URL}/categories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
