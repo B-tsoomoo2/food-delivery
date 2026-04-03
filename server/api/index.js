@@ -1,11 +1,8 @@
 const express = require("express");
 const app = express();
 
-app.use(express.json());
-
 app.get("/", (req, res) => {
-  res.send("Backend is running 🚀");
+  res.send("API ажиллаж байна 🚀");
 });
 
-// 🔥 хамгийн чухал хэсэг
 module.exports = app;
