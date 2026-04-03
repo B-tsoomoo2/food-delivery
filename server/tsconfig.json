@@ -15,6 +15,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "../admin/app/api"],
+  "include": ["src/**/*", "../admin/app/api", "api"],
   "exclude": ["node_modules", "dist"]
 }
