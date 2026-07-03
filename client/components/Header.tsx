@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import { ChevronRight, MapPin, ShoppingCart, UserRound } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartContext } from "@/app/_contexts/CartContext";
 
 export const Header = () => {
-  const [isProfileOpen, setIsProfileOpen] = useState(true);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { cart, setCartOpen } = useContext(CartContext);
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header className="sticky top-0 z-50 bg-zinc-900">
@@ -47,9 +50,15 @@ export const Header = () => {
           <button
             type="button"
             aria-label="Shopping cart"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 transition-colors hover:bg-zinc-200"
+            onClick={() => setCartOpen(true)}
+            className="relative flex h-9 w-9 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 transition-colors hover:bg-zinc-200"
           >
             <ShoppingCart className="h-4 w-4" strokeWidth={1.9} />
+            {cartCount > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white">
+                {cartCount}
+              </span>
+            )}
           </button>
 
           <div className="relative">
